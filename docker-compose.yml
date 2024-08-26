@@ -1,0 +1,50 @@
+version:  '3.7' 
+services:
+  database:
+    build:
+      context:  ./DataBase
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./DataBase:/app
+      - /app/node_modules
+    networks:
+      - zulkar
+      - abcd      
+
+  api-backend:
+    build:
+      context:  ./Api-Backend
+      dockerfile: Dockerfile
+    ports:
+      - "6000:6000"
+    volumes:
+      - ./Api-Backend:/app
+      - /app/node_modules 
+    networks:
+      - zulkar       
+
+  frontend:
+    build:
+      context:  ./FrontEnd
+      dockerfile: Dockerfile
+    ports:
+      - "7000:7000"
+    volumes:
+      - ./FrontEnd:/app
+      - /app/node_modules
+    networks:
+      - adison  
+
+networks:
+  adison:
+    driver: host
+    name: adison
+  zulkar:
+    driver: bridge
+  abcd:
+    driver: bridge
+
+
+   
